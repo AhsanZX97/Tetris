@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react';
 import { StyledTetrisWrapper, StyledTetris } from './styles/StyledTetris';
 import { createStage } from '../gameHelpers';
+
+import { usePlayer } from '../hooks/usePlayer';
+import { useStage } from '../hooks/useStage';
 
 import Stage from './Stage'
 import Display from './Display'
