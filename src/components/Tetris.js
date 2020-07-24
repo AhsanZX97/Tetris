@@ -14,7 +14,7 @@ const Tetris = () => {
     const [gameOver, setGameOver] = useState(false);
 
     const [player] = usePlayer();
-    const [stage, setStage] = useStage(player, resetPlayer);
+    const [stage, setStage] = useStage(player);
     return (
         <StyledTetrisWrapper>
             <StyledTetris>
@@ -24,12 +24,12 @@ const Tetris = () => {
                         <Display gameOver={gameOver} text="Game Over" />
                     ) : (
                             <div>
-                                <Display text={`Score: ${score}`} />
-                                <Display text={`rows: ${rows}`} />
-                                <Display text={`Level: ${level}`} />
+                                <Display text={`Score`} />
+                                <Display text={`Rows`} />
+                                <Display text={`Level`} /> 
                             </div>
                         )}
-                    <StartButton callback={startGame} />
+                    <StartButton />
                 </aside>
             </StyledTetris>
         </StyledTetrisWrapper>
