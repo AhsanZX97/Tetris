@@ -15,6 +15,27 @@ const Tetris = () => {
 
     const [player] = usePlayer();
     const [stage, setStage] = useStage(player);
+
+    const movePlayer = dir => {
+
+    }
+
+    const startGame = () => {
+
+    }
+
+    const drop = () => {
+
+    }
+
+    const dropPlayer = () => {
+
+    }
+
+    const move = ({ keyCode }) => {
+
+    }
+
     return (
         <StyledTetrisWrapper>
             <StyledTetris>
