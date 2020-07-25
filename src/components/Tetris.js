@@ -13,23 +13,24 @@ const Tetris = () => {
     const [dropTime, setDropTime] = useState(null);
     const [gameOver, setGameOver] = useState(false);
 
-    const [player] = usePlayer();
+    const [player, updatePlayerPos, resetPlayer] = usePlayer();
     const [stage, setStage] = useStage(player);
 
     const movePlayer = dir => {
-
+        updatePlayerPos({ x: dir, y: 0 });
     }
 
     const startGame = () => {
-
+        setStage(createStage());
+        resetPlayer();
     }
 
     const drop = () => {
-
+        updatePlayerPos({ x: 0, y: 1, collided: false });
     }
 
     const dropPlayer = () => {
-
+        drop();
     }
 
     const move = ({ keyCode }) => {
@@ -49,7 +50,6 @@ const Tetris = () => {
             role="button"
             tabIndex="0"
             onKeyDown={e => move(e)}
-            onKeyUp={keyUp}
         >
             <StyledTetris>
                 <Stage stage={stage} />
@@ -63,7 +63,7 @@ const Tetris = () => {
                                 <Display text={`Level`} />
                             </div>
                         )}
-                    <StartButton />
+                    <StartButton onClick = {startGame}/>
                 </aside>
             </StyledTetris>
         </StyledTetrisWrapper>
