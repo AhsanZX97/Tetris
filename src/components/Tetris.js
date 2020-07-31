@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StyledTetrisWrapper, StyledTetris } from './styles/StyledTetris';
-import { createStage } from '../gameHelpers';
+import { createStage, checkCollision } from '../gameHelpers';
 
 import { usePlayer } from '../hooks/usePlayer';
 import { useStage } from '../hooks/useStage';
@@ -14,10 +14,12 @@ const Tetris = () => {
     const [gameOver, setGameOver] = useState(false);
 
     const [player, updatePlayerPos, resetPlayer] = usePlayer();
-    const [stage, setStage] = useStage(player,resetPlayer);
+    const [stage, setStage] = useStage(player, resetPlayer);
 
     const movePlayer = dir => {
-        updatePlayerPos({ x: dir, y: 0 });
+        if (!checkCollision(player, stage, { x: dir, y: 0 })) {
+            updatePlayerPos({ x: dir, y: 0 });
+        }
     }
 
     const startGame = () => {
@@ -36,13 +38,13 @@ const Tetris = () => {
     const move = ({ keyCode }) => {
         if (!gameOver) {
             if (keyCode === 37) {
-              movePlayer(-1);
+                movePlayer(-1);
             } else if (keyCode === 39) {
-              movePlayer(1);
+                movePlayer(1);
             } else if (keyCode === 40) {
-              dropPlayer();
+                dropPlayer();
             }
-          }
+        }
     }
 
     return (
@@ -63,7 +65,7 @@ const Tetris = () => {
                                 <Display text={`Level`} />
                             </div>
                         )}
-                    <StartButton callback = {startGame}/>
+                    <StartButton callback={startGame} />
                 </aside>
             </StyledTetris>
         </StyledTetrisWrapper>
